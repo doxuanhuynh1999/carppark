@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -17,7 +18,7 @@ public class Ticket {
     private Long ticketId;
 
     @Column(name = "booking_time")
-    private Time bookingTime;
+    private LocalTime bookingTime;
 
     @Column(name = "customer_name")
     private String customerName;
@@ -27,11 +28,10 @@ public class Ticket {
     private Car car;
 
     @ManyToOne()
-    @JoinColumn(name = "trip_id",nullable = false,foreignKey = @ForeignKey(name = "trip_id"))
+    @JoinColumn(name = "trip_id_ticket",nullable = false,foreignKey = @ForeignKey(name = "trip_id_ticket"))
     @JsonBackReference
-    private Trip trip;
+    private Trip tripTicket;
 
-
-
-
+    public Ticket() {
+    }
 }

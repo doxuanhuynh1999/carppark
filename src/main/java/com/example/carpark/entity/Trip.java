@@ -5,7 +5,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,21 +16,21 @@ import java.util.Set;
 @Table(name = "trip")
 public class Trip {
     @Id
-    @Column(name = "trip_id",length = 20)
+    @Column(name = "trip_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tripId;
 
-    @Column(name = "booked_ticket_number",length = 11)
+    @Column(name = "booked_ticket_number")
     private Integer bookedTicketNumber;
 
     @Column(name = "car_type",length =11)
     private String carType;
 
     @Column(name = "departure_date")
-    private Date departureDate;
+    private LocalDate departureDate;
 
     @Column(name = "departure_time")
-    private Time departureTime;
+    private LocalTime departureTime;
 
     @Column(name = "destination",length =50)
     private String destination;
@@ -35,16 +38,16 @@ public class Trip {
     @Column(name = "driver",length = 11)
     private String driver;
 
-    @Column(name = "maximum_online_ticket-number")
+    @Column(name = "maximum_online_ticket_number")
     private Integer maximumOnlineTicketNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "trip")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tripTicket")
     @JsonManagedReference
-    private Set<Ticket> tiketTrips;
+    private List<Ticket> tiketTrips;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy ="tripBooking")
     @JsonManagedReference
-    private Set<Bookingoffice> bookingOffice;
+    private List<Bookingoffice> bookingOffice;
 
     public Trip() {
     }

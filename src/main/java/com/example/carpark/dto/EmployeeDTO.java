@@ -2,6 +2,7 @@ package com.example.carpark.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 public class EmployeeDTO {
@@ -9,7 +10,7 @@ public class EmployeeDTO {
     private String account;
     private String department;
     private String employeeAddress;
-    private Date employeeBirthday;
+    private LocalDate employeeBirthday;
     private String employeeEmail;
     private String empployeeName;
     private String employeePhone;
@@ -18,8 +19,7 @@ public class EmployeeDTO {
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(Long employeeId, String account, String department, String employeeAddress, Date employeeBirthday, String employeeEmail, String empployeeName, String employeePhone, String sex) {
-        this.employeeId = employeeId;
+    public EmployeeDTO(String account, String department, String employeeAddress, LocalDate employeeBirthday, String employeeEmail, String empployeeName, String employeePhone, String sex) {
         this.account = account;
         this.department = department;
         this.employeeAddress = employeeAddress;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,7 +17,7 @@ public class Bookingoffice {
     private Long officeId;
 
     @Column(name = "end_contract_deadline")
-    private Date endContractDeadline;
+    private LocalDate endContractDeadline;
 
     @Column(name = "office_name",length = 50)
     private String officeName;
@@ -27,12 +28,11 @@ public class Bookingoffice {
     @Column(name = "office_place",length = 50)
     private String officePlace;
 
-    @Column(name = "officePrice",length = 20)
+    @Column(name = "office_price",length = 20)
     private Long officePrice;
 
     @Column(name = "start_contract_deadline")
-    private Date startContractDeadline;
-
+    private LocalDate startContractDeadline;
 
     @ManyToOne()
     @JoinColumn(name = "trip_id",nullable = false, foreignKey = @ForeignKey(name = "trip_id"))

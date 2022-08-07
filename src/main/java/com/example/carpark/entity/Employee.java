@@ -3,6 +3,7 @@ package com.example.carpark.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,12 +25,12 @@ public class Employee {
     private String employeeAddress;
 
     @Column(name = "employee_birthday")
-    private Date employeeBirthday;
+    private LocalDate employeeBirthday;
 
     @Column(name = "employee_email", length = 50)
     private String employeeEmail;
 
-    @Column(name = "empployee_name",length = 50)
+    @Column(name = "employee_name",length = 50)
     private String empployeeName;
 
     @Column(name = "employee_phone",length = 10)
@@ -44,7 +45,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee( String account, String department, String employeeAddress, Date employeeBirthday, String employeeEmail, String empployeeName, String employeePhone, String password, String sex) {
+    public Employee(String account, String department, String employeeAddress, LocalDate employeeBirthday, String employeeEmail, String empployeeName, String employeePhone, String password, String sex) {
         this.account = account;
         this.department = department;
         this.employeeAddress = employeeAddress;

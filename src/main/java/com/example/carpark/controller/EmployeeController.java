@@ -1,37 +1,41 @@
 package com.example.carpark.controller;
 
 import com.example.carpark.entity.Employee;
-import com.example.carpark.sevice.ServiceEmployee;
+import com.example.carpark.exception.ExistedExcepttion;
+import com.example.carpark.exception.NotFoundException;
+import com.example.carpark.form.EmployeeForm;
+import com.example.carpark.service.employee.ServiceEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import javax.validation.Valid;
 
 @RestController
 public class EmployeeController {
     @Autowired
     private ServiceEmployee serviceEmployee;
     @PostMapping(value = "/addEmployee")
-    public ResponseEntity<Object> getEmployees(@RequestBody Employee employee) {
-//        Employee employee = new Employee();
-//        employee.setAccount("HuynhDX");
-//        employee.setDepartment("IT");
-//        employee.setEmployeeAddress("HaNOi");
-//        employee.setEmployeeBirthday(new Date());
-//        employee.setEmployeeEmail("huynhd@gmail.com");
-//        employee.setEmpployeeName("huynh");
-//        employee.setEmployeePhone("0965266856");
-//        employee.setPassword("12345");
-//        employee.setSex("nam");
-        return new ResponseEntity<>(serviceEmployee.addEmployee(employee), HttpStatus.OK);
+    public ResponseEntity<Object> addEmployees(@RequestBody @Valid EmployeeForm employeeForm) throws ExistedExcepttion {
+        return new ResponseEntity<>(serviceEmployee.addEmployee(employeeForm), HttpStatus.OK);
     }
     @GetMapping(value = "/getEmployees")
     public ResponseEntity<Object> getEmployeesList() {
         return new ResponseEntity<>(serviceEmployee.getEmployees(),HttpStatus.OK);
+    }
+    @PutMapping(value = "/updateEmployee/{id}")
+    public ResponseEntity<Object> updateEmployee(@PathVariable("id") Long id ,@RequestBody @Valid Employee employee) throws NotFoundException {
+        serviceEmployee.updateEmployee(id, employee);
+        return new ResponseEntity<>("update oke", HttpStatus.OK);
+    }
+    @DeleteMapping(value = "/deleteEmployee/{id}")
+    public ResponseEntity<Object> deleteEmployee(@PathVariable("id") Long id) {
+        serviceEmployee.deleteEmployee(id);
+        return new ResponseEntity<>("delete oke", HttpStatus.OK);
+    }
+    @GetMapping(value = "/getById/{id}")
+    public ResponseEntity<Object> getById(@PathVariable("id") Long id) throws NotFoundException {
+        return new ResponseEntity<>(serviceEmployee.getById(id),HttpStatus.OK);
     }
 }

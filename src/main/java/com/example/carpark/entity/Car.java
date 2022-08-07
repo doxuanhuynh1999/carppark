@@ -2,9 +2,11 @@ package com.example.carpark.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,7 +33,14 @@ public class Car {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="car")
     @JsonManagedReference
-    private Set<Ticket> ticketCars;
+    private List<Ticket> ticketCars;
     public Car() {
+    }
+
+    public Car(String carColor, String carType, String company, Parkinglot parkinglot) {
+        this.carColor = carColor;
+        this.carType = carType;
+        this.company = company;
+        this.parkinglot = parkinglot;
     }
 }

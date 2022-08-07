@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,7 +32,7 @@ public class Parkinglot {
     private String parkStatus;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "parkinglot")
     @JsonManagedReference
-    private Set<Car> cars;
+    private List<Car> cars;
 
     public Parkinglot() {
     }
